@@ -1,0 +1,18 @@
+
+Verify: Do we really want the Morning, Afternoon, Night split? 
+	Are we sure we don't want a split into 4 spans of 6h each? (morning, afternoon, evening, night) 
+
+UnitTests
+	GetTimeGrouping()
+	MeasurmentAggregator
+	GetAvgPollutionValues
+
+Api
+	GetYesterdaysPollutuion
+	GetPollution (by time, pollutant and location)
+	PollutionRequestModel
+
+ErrorHandling
+	try / catches
+	strict nullables
+	log messages

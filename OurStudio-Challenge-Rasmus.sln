@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PollutionApi", "PollutionApi\PollutionApi.csproj", "{39D369BE-3BC8-D4DA-7B4E-4CD8345B25B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{5ED06CAD-956C-C94D-BC0C-E89E30A887C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{6B48C957-1B52-445E-8569-F7137B9496F9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{39D369BE-3BC8-D4DA-7B4E-4CD8345B25B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39D369BE-3BC8-D4DA-7B4E-4CD8345B25B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39D369BE-3BC8-D4DA-7B4E-4CD8345B25B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39D369BE-3BC8-D4DA-7B4E-4CD8345B25B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ED06CAD-956C-C94D-BC0C-E89E30A887C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ED06CAD-956C-C94D-BC0C-E89E30A887C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ED06CAD-956C-C94D-BC0C-E89E30A887C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ED06CAD-956C-C94D-BC0C-E89E30A887C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B48C957-1B52-445E-8569-F7137B9496F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B48C957-1B52-445E-8569-F7137B9496F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B48C957-1B52-445E-8569-F7137B9496F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B48C957-1B52-445E-8569-F7137B9496F9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {15E5BE14-1766-4835-8718-C34DF851D4F6}
+	EndGlobalSection
+EndGlobal
