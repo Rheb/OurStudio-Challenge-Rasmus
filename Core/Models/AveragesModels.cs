@@ -35,3 +35,31 @@ public class Averages
     }
 }
 
+public enum TimeGrouping
+{
+    /// <summary>
+    /// From 06:00 to 12:00 (exclusive)
+    /// </summary>
+    Morning_06to12 = 0,
+    /// <summary>
+    /// From 12:00 to 18:00 (exclusive)
+    /// </summary>
+    Afternoon_12to18 = 1,
+    /// <summary>
+    /// From 18:00 to 06:00 (next day exclusive)
+    /// </summary>
+    Night_18to06 = 2,
+}
+
+public static class AveragesExtensions
+{
+    public static TimeGrouping GetTimeGrouping(this DateTime date)
+    {
+        return date.Hour switch
+        {
+            >= 6 and < 12 => TimeGrouping.Morning_06to12,
+            >= 12 and < 18 => TimeGrouping.Afternoon_12to18,
+            _ => TimeGrouping.Night_18to06
+        };
+    }
+}

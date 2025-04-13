@@ -3,21 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Core.Logic;
 
-public enum TimeGrouping
-{
-    /// <summary>
-    /// From 06:00 to 12:00 (exclusive)
-    /// </summary>
-    Morning = 0,
-    /// <summary>
-    /// From 12:00 to 18:00 (exclusive)
-    /// </summary>
-    Afternoon = 1,
-    /// <summary>
-    /// From 18:00 to 06:00 (exclusive)
-    /// </summary>
-    Night = 2,
-}
+
 
 public class AveragesLogic
 {
@@ -88,32 +74,19 @@ public class AveragesLogic
         {
             Pm10 = new Averages
             {
-                Morning = pm10.Aggregators[TimeGrouping.Morning].GetAverage(),
-                Afternoon = pm10.Aggregators[TimeGrouping.Afternoon].GetAverage(),
-                Night = pm10.Aggregators[TimeGrouping.Night].GetAverage(),
+                Morning = pm10.Aggregators[TimeGrouping.Morning_06to12].GetAverage(),
+                Afternoon = pm10.Aggregators[TimeGrouping.Afternoon_12to18].GetAverage(),
+                Night = pm10.Aggregators[TimeGrouping.Night_18to06].GetAverage(),
             },
             Pm2pt5 = new Averages
             {
-                Morning = pm2pt5.Aggregators[TimeGrouping.Morning].GetAverage(),
-                Afternoon = pm2pt5.Aggregators[TimeGrouping.Afternoon].GetAverage(),
-                Night = pm2pt5.Aggregators[TimeGrouping.Night].GetAverage(),
+                Morning = pm2pt5.Aggregators[TimeGrouping.Morning_06to12].GetAverage(),
+                Afternoon = pm2pt5.Aggregators[TimeGrouping.Afternoon_12to18].GetAverage(),
+                Night = pm2pt5.Aggregators[TimeGrouping.Night_18to06].GetAverage(),
             }
         };
 
         return da;
-    }
-}
-
-public static class AveragesExtensions
-{
-    public static TimeGrouping GetTimeGrouping(this DateTime date)
-    {
-        return date.Hour switch
-        {
-            >= 6 and < 12 => TimeGrouping.Morning,
-            >= 12 and < 18 => TimeGrouping.Afternoon,
-            _ => TimeGrouping.Night
-        };
     }
 }
 

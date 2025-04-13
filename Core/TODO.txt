@@ -1,6 +1,6 @@
 
 Verify: Do we really want the Morning, Afternoon, Night split? 
-	Are we sure we don't want a split into 4 spans of 6h each? (morning, afternoon, evening, night) 
+	Are we sure we don't want a split into 4 equal spans of 6h each? (morning, afternoon, evening, night) 
 
 UnitTests
 	GetTimeGrouping()
