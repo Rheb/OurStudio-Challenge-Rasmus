@@ -4,56 +4,7 @@ namespace Core.Logic;
 
 public static class AveragesLogic
 {
-    /// <summary>
-    /// Keep for reference
-    /// </summary>
-    public static DailyPMAverages Defunct_ParsePollutionData(HourlyData data)
-    {
-        double morningPm10 = 0, morningPm25 = 0;
-        double afternoonPm10 = 0, afternoonPm25 = 0;
-        double nightPm10 = 0, nightPm25 = 0;
-
-        for (int i = 0; i < data.Hourly.Time.Length; i++)
-        {
-            var time = DateTime.Parse(data.Hourly.Time[i]);
-
-            if (time.Hour > 6 && time.Hour < 12)
-            {
-                morningPm10 += data.Hourly.Pm10[i];
-                morningPm25 += data.Hourly.Pm2pt5[i];
-            }
-            else if (time.Hour > 12 && time.Hour < 18)
-            {
-                afternoonPm10 += data.Hourly.Pm10[i];
-                afternoonPm25 += data.Hourly.Pm2pt5[i];
-            }
-            else if (time.Hour < 6 || time.Hour > 18)
-            {
-                nightPm10 += data.Hourly.Pm10[i];
-                nightPm25 += data.Hourly.Pm2pt5[i];
-            }
-        }
-
-        var da = new DailyPMAverages
-        {
-            Pm10 = new Averages
-            {
-                Morning = morningPm10 / 6,
-                Afternoon = afternoonPm10 / 6,
-                Night = nightPm10 / 12
-            },
-            Pm2pt5 = new Averages
-            {
-                Morning = morningPm25 / 6,
-                Afternoon = afternoonPm25 / 6,
-                Night = nightPm25 / 12
-            }
-        };
-
-        return da;
-    }
-
-    public static DailyPMAverages GetAvgPollutionValues(HourlyData data)
+    public static DailyPMAverages GetAvgPMValues(HourlyData data)
     {
         TimeSpanAggregator pm10 = new();
         TimeSpanAggregator pm2pt5 = new();

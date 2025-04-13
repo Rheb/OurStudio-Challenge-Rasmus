@@ -2,17 +2,18 @@
 using Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using PollutionApi.Models;
+using System.Linq.Expressions;
 
 namespace PollutionApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     public class PollutionReader(HttpClient client) : ControllerBase
     {
         private HttpClient HttpClient { get; init; } = client;
 
-        [HttpGet(Name = "GetDefaultPollutionData")]
-        public async Task<DailyPMAverages> GetDefaultPollutionData()
+        [HttpGet]
+        public async Task<DailyPMAverageResponse> GetDefaultPollutionData()
         {
             DateTime yesterday = DateTime.Today.AddDays(-1);
 
@@ -25,35 +26,55 @@ namespace PollutionApi.Controllers
                 EndDate_Inclusive = yesterday,
             };
 
-            DailyPMAverages data = await FetchData(defaultRequest);
-
-            return data;
+            return await FetchData(defaultRequest);
         }
 
-        [HttpGet(Name = "GetPollutionData")]
-        public async Task<DailyPMAverages> GetPollutionData(PollutionApiRequest request)
+        [HttpGet]
+        public async Task<DailyPMAverageResponse> GetPollutionData([FromQuery] PollutionApiRequest request)
         {
-            DailyPMAverages data = await FetchData(request);
-
-            return data;
+            return await FetchData(request);
         }
 
-        private async Task<DailyPMAverages> FetchData(PollutionApiRequest request)
+        private async Task<DailyPMAverageResponse> FetchData(PollutionApiRequest request)
         {
-            string url = request.GetUrl();
+            string errorMessage = "";
 
-            HttpResponseMessage res = await HttpClient.GetAsync(url);
-            HourlyData? data = await res.Content.ReadFromJsonAsync<HourlyData>();
-
-            if (data is null)
+            try
             {
-                // TODO Error handling
-                return new DailyPMAverages();
+                string url = request.GetUrl();
+
+                HttpResponseMessage res = await HttpClient.GetAsync(url);
+                HourlyData? data = await res.Content.ReadFromJsonAsync<HourlyData>();
+
+                if (
+                    data != null
+                    && data.Hourly.Time.Length > 0
+                )
+                {
+                    DailyPMAverages averages = AveragesLogic.GetAvgPMValues(data);
+
+                    return new DailyPMAverageResponse
+                    {
+                        Pm10 = averages.Pm10,
+                        Pm2pt5 = averages.Pm2pt5,
+                        Summary = averages.GetSummary(),
+                    };
+                }
+                else
+                {
+                    errorMessage = "Data is null or empty";
+                }
+            }
+            catch (Exception ex)
+            {
+                errorMessage = $"An unknown error has occured {ex}";
             }
 
-            DailyPMAverages averages = AveragesLogic.GetAvgPollutionValues(data);
-
-            return averages;
+            return new DailyPMAverageResponse
+            {
+                IsSuccess = false,
+                ErrorMessage = errorMessage
+            };
         }
     }
 }

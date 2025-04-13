@@ -2,8 +2,8 @@
 
 public class DailyPMAverages
 {
-    public Averages Pm10 { get; set; } = new();
-    public Averages Pm2pt5 { get; set; } = new();
+    public Averages Pm10 { get; init; } = new();
+    public Averages Pm2pt5 { get; init; } = new();
 
     public const string Unit = "μg / m³";
 

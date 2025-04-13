@@ -2,18 +2,18 @@
 Verify: Do we really want the Morning, Afternoon, Night split? 
 	Are we sure we don't want a split into 4 equal spans of 6h each? (morning, afternoon, evening, night) 
 
+MeasurementTypes
+	For PollutionApiRequest.MeasurmentTypes to make any sense, response has to be parsed into a dictionary.
+		Otherwise limit to pre-determined types
+
 UnitTests
 	GetTimeGrouping()
 	MeasurmentAggregator
 	GetAvgPollutionValues
 
-Api
-	Verify that JSON Parsing of request model works
-
-ErrorHandling
-	try / catches
-	log messages
-	Api ReadDefaultPollutionData
+Logging
+	Errors
+	Events
 
 Config
 	Default Request
