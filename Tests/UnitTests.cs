@@ -26,9 +26,9 @@ namespace Tests
         [Fact]
         public void Test_Averages()
         {
-            HourlyData hourly = new HourlyData();
+            HourlyData hourly = new();
 
-            List<int> nums = new List<int>();
+            List<int> nums = [];
 
             double mBase = 0, aBase = 0, nBase = 0;
 
@@ -54,9 +54,9 @@ namespace Tests
                 }
             }
 
-            hourly.Hourly.Time = nums.Select(i => $"{DateTime.Now.Date.AddHours(i):yyyy-MM-dd HH:mm}").ToArray();
-            hourly.Hourly.Pm2pt5 = nums.Select(i => i * 2.0).ToArray();
-            hourly.Hourly.Pm10 = nums.Select(i => i * 17.0).ToArray();
+            hourly.Hourly.Time = [.. nums.Select(i => $"{DateTime.Now.Date.AddHours(i):yyyy-MM-dd HH:mm}")];
+            hourly.Hourly.Pm2pt5 = [.. nums.Select(i => i * 2.0)];
+            hourly.Hourly.Pm10 = [.. nums.Select(i => i * 17.0)];
 
             var avgs = AveragesLogic.GetAvgPMValues(hourly);
 

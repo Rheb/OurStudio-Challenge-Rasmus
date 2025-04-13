@@ -37,7 +37,7 @@ namespace PollutionApi.Controllers
 
         private async Task<DailyPMAverageResponse> FetchData(PollutionApiRequest request)
         {
-            string errorMessage = "";
+            string errorMessage;
 
             try
             {
