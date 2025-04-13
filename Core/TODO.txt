@@ -8,11 +8,14 @@ UnitTests
 	GetAvgPollutionValues
 
 Api
-	GetYesterdaysPollutuion
-	GetPollution (by time, pollutant and location)
-	PollutionRequestModel
+	Verify that JSON Parsing of request model works
 
 ErrorHandling
 	try / catches
-	strict nullables
 	log messages
+	Api ReadDefaultPollutionData
+
+Config
+	Default Request
+	Request Options
+	API documentation

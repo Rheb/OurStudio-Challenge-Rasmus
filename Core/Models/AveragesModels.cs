@@ -21,9 +21,9 @@ public class DailyPMAverages
 
 public class Averages
 {
-    public double Morning { get; set; }
-    public double Afternoon { get; set; }
-    public double Night { get; set; }
+    public double Morning { get; set; } = 0;
+    public double Afternoon { get; set; } = 0;
+    public double Night { get; set; } = 0;
 
     public string GetSummary(string unit)
     {

@@ -1,25 +1,59 @@
-﻿using Core.Models;
+﻿using Core.Logic;
+using Core.Models;
 using Microsoft.AspNetCore.Mvc;
+using PollutionApi.Models;
 
 namespace PollutionApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PollutionReader : ControllerBase
+    public class PollutionReader(HttpClient client) : ControllerBase
     {
-        private HttpClient HttpClient { get; init; }
+        private HttpClient HttpClient { get; init; } = client;
 
-        public PollutionReader(HttpClient client)
+        [HttpGet(Name = "GetDefaultPollutionData")]
+        public async Task<DailyPMAverages> GetDefaultPollutionData()
         {
-            HttpClient = client;
+            DateTime yesterday = DateTime.Today.AddDays(-1);
+
+            PollutionApiRequest defaultRequest = new()
+            {
+                Latitude = 52.5235,
+                Longitude = 13.4115,
+                MeasurmentTypes = ["pm10", "pm2_5"],
+                StartDate = yesterday,
+                EndDate_Inclusive = yesterday,
+            };
+
+            DailyPMAverages data = await FetchData(defaultRequest);
+
+            return data;
         }
 
-        [HttpGet(Name = "ReadPollutionData")]
-        public async Task ReadPollutionData()
+        [HttpGet(Name = "GetPollutionData")]
+        public async Task<DailyPMAverages> GetPollutionData(PollutionApiRequest request)
         {
-            HttpResponseMessage res = await HttpClient.GetAsync("https://air-quality-api.open-meteo.com/v1/air-quality?latitude=52.5235&longitude=13.4115&hourly=pm10,pm2_5&start_date=2023-01-31&end_date=2023-01-31");
-            string content = await res.Content.ReadAsStringAsync();
+            DailyPMAverages data = await FetchData(request);
+
+            return data;
+        }
+
+        private async Task<DailyPMAverages> FetchData(PollutionApiRequest request)
+        {
+            string url = request.GetUrl();
+
+            HttpResponseMessage res = await HttpClient.GetAsync(url);
             HourlyData? data = await res.Content.ReadFromJsonAsync<HourlyData>();
+
+            if (data is null)
+            {
+                // TODO Error handling
+                return new DailyPMAverages();
+            }
+
+            DailyPMAverages averages = AveragesLogic.GetAvgPollutionValues(data);
+
+            return averages;
         }
     }
 }

@@ -5,17 +5,17 @@ namespace Core.Models;
 public class HourlyData
 {
     [JsonPropertyName("hourly")]
-    public Hourly Hourly { get; set; }
+    public Hourly Hourly { get; set; } = new();
 }
 
 public class Hourly
 {
     [JsonPropertyName("time")]
-    public string[] Time { get; set; }
+    public string[] Time { get; set; } = [];
 
     [JsonPropertyName("pm10")]
-    public double[] Pm10 { get; set; }
+    public double[] Pm10 { get; set; } = [];
 
     [JsonPropertyName("pm2_5")]
-    public double[] Pm2pt5 { get; set; }
+    public double[] Pm2pt5 { get; set; } = [];
 }

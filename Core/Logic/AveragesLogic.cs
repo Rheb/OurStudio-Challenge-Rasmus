@@ -1,16 +1,13 @@
 ﻿using Core.Models;
-using System.Runtime.CompilerServices;
 
 namespace Core.Logic;
 
-
-
-public class AveragesLogic
+public static class AveragesLogic
 {
     /// <summary>
     /// Keep for reference
     /// </summary>
-    public DailyPMAverages Defunct_ParsePollutionData(HourlyData data)
+    public static DailyPMAverages Defunct_ParsePollutionData(HourlyData data)
     {
         double morningPm10 = 0, morningPm25 = 0;
         double afternoonPm10 = 0, afternoonPm25 = 0;
@@ -56,7 +53,7 @@ public class AveragesLogic
         return da;
     }
 
-    public DailyPMAverages GetAvgPollutionValues(HourlyData data)
+    public static DailyPMAverages GetAvgPollutionValues(HourlyData data)
     {
         TimeSpanAggregator pm10 = new();
         TimeSpanAggregator pm2pt5 = new();
