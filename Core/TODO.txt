@@ -7,9 +7,7 @@ MeasurementTypes
 		Otherwise limit to pre-determined types
 
 UnitTests
-	GetTimeGrouping()
-	MeasurmentAggregator
-	GetAvgPollutionValues
+	Improve coverage
 
 Logging
 	Errors
